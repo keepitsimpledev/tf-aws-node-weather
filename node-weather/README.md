@@ -1,5 +1,8 @@
+to setup project:
+```npm install```
+
 to run test(s):
-`npm run test`
+```npm run test```
 
 to run typescript app:
-`npm run hello`
+```npm run hello```
