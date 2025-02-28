@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
     "hello": "npx tsc && node index.js",
+    "weather": "npx tsc && node meteo.js",
     "fmt": "npx prettier . --write",
     "check": "npx prettier . --check"
   },
@@ -15,5 +17,8 @@
   "devDependencies": {
     "prettier": "3.5.2",
     "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "openmeteo": "^1.1.5"
   }
 }
