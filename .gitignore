@@ -1,4 +1,7 @@
 **/.terraform/*
+
+# for typescript, .js are build artifacts
+*.js
 node_modules/
 
 # to not expose sensitive information:
