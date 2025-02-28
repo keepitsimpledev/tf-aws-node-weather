@@ -4,13 +4,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "hello": "npx tsc && node index.js"
+    "hello": "npx tsc && node index.js",
+    "fmt": "npx prettier . --write",
+    "check": "npx prettier . --check"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "prettier": "3.5.2",
     "typescript": "^5.7.3"
   }
 }

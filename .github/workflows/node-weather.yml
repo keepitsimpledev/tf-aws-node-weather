@@ -1,0 +1,23 @@
+name: Node Github CI
+
+on: [push]
+
+env:
+  NODE_VERSION: "22.14.0"
+
+jobs:
+  test:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: npm install and test
+      run: |
+        npm install
+        npm run check
+        npm test
