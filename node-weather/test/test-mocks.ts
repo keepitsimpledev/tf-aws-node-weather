@@ -1,5 +1,13 @@
 import { UnitType } from "../src/types";
-import { TEST_C_CURRENT, TEST_C_HIGH, TEST_C_LOW, TEST_F_CURRENT, TEST_F_HIGH, TEST_F_LOW, TEST_TIME } from "./meteo.test";
+import {
+  TEST_C_CURRENT,
+  TEST_C_HIGH,
+  TEST_C_LOW,
+  TEST_F_CURRENT,
+  TEST_F_HIGH,
+  TEST_F_LOW,
+  TEST_TIME,
+} from "./meteo.test";
 
 function getCurrentTemp(i: number, unitType: UnitType): number {
   if (i != 0) {
@@ -27,35 +35,55 @@ function getMinOrMaxTemp(i: number, unitType: UnitType): Float32Array | null {
 }
 
 type SimplifiedWeatherApiResponse = {
-  utcOffsetSeconds: () => number
+  utcOffsetSeconds: () => number;
   current: () => {
-    time: () => bigint,
+    time: () => bigint;
     variables: (i: number) => {
-      value: () => number
-    }
-  },
+      value: () => number;
+    };
+  };
   daily: () => {
     variables: (i: number) => {
-      valuesArray: () => Float32Array | null
-    }
-  }
-}
+      valuesArray: () => Float32Array | null;
+    };
+  };
+};
 
-export function mockedFetchWeatherApi(unitType: UnitType = UnitType.Metric): SimplifiedWeatherApiResponse[] {
+export function mockedFetchWeatherApi(
+  unitType: UnitType = UnitType.Metric,
+): SimplifiedWeatherApiResponse[] {
   const time = BigInt(TEST_TIME);
 
-  return [{
-    utcOffsetSeconds: () => { return 0; },
-    current: () => {
-      return {
-        time: (): bigint => { return time; },
-        variables: (i: number) => { return { value: () => { return getCurrentTemp(i, unitType); }}}
-      }
+  return [
+    {
+      utcOffsetSeconds: () => {
+        return 0;
+      },
+      current: () => {
+        return {
+          time: (): bigint => {
+            return time;
+          },
+          variables: (i: number) => {
+            return {
+              value: () => {
+                return getCurrentTemp(i, unitType);
+              },
+            };
+          },
+        };
+      },
+      daily: () => {
+        return {
+          variables: (i: number) => {
+            return {
+              valuesArray: (): Float32Array | null => {
+                return getMinOrMaxTemp(i, unitType);
+              },
+            };
+          },
+        };
+      },
     },
-    daily: () => {
-      return {
-        variables: (i: number) => { return { valuesArray: (): Float32Array | null => { return getMinOrMaxTemp(i, unitType); }}}
-      }
-    }
-  }];
+  ];
 }

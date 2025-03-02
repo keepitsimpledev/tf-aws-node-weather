@@ -10,13 +10,12 @@ jest.mock("openmeteo", () => ({
 export const TEST_TIME = 1740925800;
 export const TEST_C_CURRENT = -5.222;
 export const TEST_C_HIGH = 3.555;
-export const TEST_C_LOW = -7.000
+export const TEST_C_LOW = -7.001;
 export const TEST_F_CURRENT = 22.777;
 export const TEST_F_HIGH = 38.333;
 export const TEST_F_LOW = 19.444;
 
 describe("weather test", () => {
-
   test("metric test", async () => {
     // arrange
     (fetchWeatherApi as jest.Mock).mockReturnValue(mockedFetchWeatherApi());
@@ -26,7 +25,7 @@ describe("weather test", () => {
 
     // assert
     const expectedTime = new Date(Number(BigInt(TEST_TIME)) * 1000);
-    
+
     const expectedHigh = new Float32Array(1);
     expectedHigh[0] = TEST_C_HIGH;
 
@@ -41,14 +40,16 @@ describe("weather test", () => {
 
   test("imperial test", async () => {
     // arrange
-    (fetchWeatherApi as jest.Mock).mockReturnValue(mockedFetchWeatherApi(UnitType.Imperial));
+    (fetchWeatherApi as jest.Mock).mockReturnValue(
+      mockedFetchWeatherApi(UnitType.Imperial),
+    );
 
     // act
     const weatherData = await fetchWeather(UnitType.Imperial);
 
     // assert
     const expectedTime = new Date(Number(BigInt(TEST_TIME)) * 1000);
-    
+
     const expectedHigh = new Float32Array(1);
     expectedHigh[0] = TEST_F_HIGH;
 
@@ -60,5 +61,4 @@ describe("weather test", () => {
     expect(weatherData.daily.temperature2mMax).toEqual(expectedHigh);
     expect(weatherData.daily.temperature2mMin).toEqual(expectedLow);
   });
-
 });
