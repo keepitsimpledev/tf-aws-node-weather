@@ -15,7 +15,6 @@ export async function fetchWeather(
     current: "temperature_2m",
     daily: ["temperature_2m_max", "temperature_2m_min"],
     forecast_days: 1,
-    // timezone: LOCATION_TZ,
   };
 
   if (unitType == UnitType.Imperial) {
