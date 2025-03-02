@@ -15,11 +15,11 @@ export const TEST_F_CURRENT = 22.777;
 export const TEST_F_HIGH = 38.333;
 export const TEST_F_LOW = 19.444;
 const expectedWeatherString =
-  "Location: Penn Station, NYC\n" +
-  "Time:     Sun Mar 02 2025 09:30:00 GMT-0500 (Eastern Standard Time)\n" +
-  "Current:  22.8 ˚F / -5.2 ˚C\n" +
-  "High:     38.3 ˚F / 3.6 ˚C\n" +
-  "Low:      19.4 ˚F / -7.0 ˚C\n";
+  "Location:   Penn Station, NYC\n" +
+  "Local Time: 3/2/2025, 9:30:00 AM\n" +
+  "Current:    22.8 ˚F / -5.2 ˚C\n" +
+  "High:       38.3 ˚F / 3.6 ˚C\n" +
+  "Low:        19.4 ˚F / -7.0 ˚C\n";
 
 describe("weather test", () => {
   afterEach(() => {

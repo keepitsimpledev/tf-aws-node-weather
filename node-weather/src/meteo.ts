@@ -2,6 +2,7 @@ import { fetchWeatherApi } from "openmeteo";
 import { UnitType, WeatherData, WeatherParameters } from "./types";
 
 const LOCATION_NAME = "Penn Station, NYC";
+const LOCATION_TZ = "America/New_York";
 const PENN_STATTION_LATITUDE = 40.78846;
 const PENN_STATION_LONGITUDE = -73.386034;
 
@@ -31,12 +32,12 @@ export async function fetchWeather(
 
   // Attributes for timezone and location
   const utcOffsetSeconds = response.utcOffsetSeconds();
-  console.log("utcOffsetSeconds: " + utcOffsetSeconds);
 
   const current = response.current()!;
   const daily = response.daily()!;
 
   // Note: The order of weather variables in the URL query and the indices below need to match!
+
   const weatherData: WeatherData = {
     current: {
       time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
@@ -65,11 +66,12 @@ export async function weatherToString(): Promise<string> {
   const cLow = metricWeather.daily.temperature2mMin[0].toFixed(1);
 
   let weather: string = "";
-  weather += `Location: ${LOCATION_NAME}\n`;
-  weather += `Time:     ${metricWeather.current.time}\n`;
-  weather += `Current:  ${fCurrent} ˚F / ${cCurrent} ˚C\n`;
-  weather += `High:     ${fHigh} ˚F / ${cHigh} ˚C\n`;
-  weather += `Low:      ${fLow} ˚F / ${cLow} ˚C\n`;
+  weather += `Location:   ${LOCATION_NAME}\n`;
+  // weather += `GMT:      ${metricWeather.current.time.toLocaleString('en-US', { timeZone: "GMT+0" })} GMT\n`;
+  weather += `Local Time: ${metricWeather.current.time.toLocaleString('en-US', { timeZone: LOCATION_TZ })}\n`;
+  weather += `Current:    ${fCurrent} ˚F / ${cCurrent} ˚C\n`;
+  weather += `High:       ${fHigh} ˚F / ${cHigh} ˚C\n`;
+  weather += `Low:        ${fLow} ˚F / ${cLow} ˚C\n`;
 
   return weather;
 }
