@@ -1,4 +1,10 @@
+# terraform
 **/.terraform/*
 
 # to not expose sensitive information:
 *.tfstate* 
+
+# ignore node build artifacts
+node-weather/coverage
+node_modules/
+dist
