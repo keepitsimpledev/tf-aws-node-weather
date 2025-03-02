@@ -1,12 +1,12 @@
 {
   "name": "weather",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "test": "npx jest",
-    "build": "npx tsc",
-    "hello": "npx tsc && node dist/index.js",
-    "weather": "npx tsc && node dist/meteo.js",
+    "build": "npx tsc --build --clean && npx tsc",
+    "hello": "npx tsc && node dist/src/index.js",
+    "weather": "npx tsc && node dist/src/meteo.js",
     "fmt": "npx prettier . --write",
     "check": "npx prettier . --check && npx eslint ."
   },
@@ -25,6 +25,7 @@
     "typescript-eslint": "^8.25.0"
   },
   "dependencies": {
+    "@openmeteo/sdk": "^1.19.0",
     "openmeteo": "^1.1.5"
   }
 }
