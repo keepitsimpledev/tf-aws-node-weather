@@ -7,6 +7,5 @@
 # node
 node_modules/
 
-# for typescript, .js are build artifacts
-*.js
-
+# ignore build artifacts
+dist

@@ -1,12 +1,12 @@
 {
   "name": "weather",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
-    "hello": "npx tsc && node index.js",
-    "weather": "npx tsc && node meteo.js",
+    "hello": "npx tsc && node dist/index.js",
+    "weather": "npx tsc && node dist/meteo.js",
     "fmt": "npx prettier . --write",
     "check": "npx prettier . --check"
   },
