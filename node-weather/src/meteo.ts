@@ -25,10 +25,6 @@ export async function fetchWeather(
   const url = "https://api.open-meteo.com/v1/forecast";
   const responses = await fetchWeatherApi(url, meteoApiParams);
 
-  // Helper function to form time ranges
-  const range = (start: number, stop: number, step: number) =>
-    Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
-
   // Process first location. Add a for-loop for multiple locations or weather models
   const response = responses[0];
 
@@ -45,11 +41,6 @@ export async function fetchWeather(
       temperature2m: current.variables(0)!.value(),
     },
     daily: {
-      time: range(
-        Number(daily.time()),
-        Number(daily.timeEnd()),
-        daily.interval(),
-      ).map((t) => new Date((t + utcOffsetSeconds) * 1000)),
       temperature2mMax: daily.variables(0)!.valuesArray()!,
       temperature2mMin: daily.variables(1)!.valuesArray()!,
     },
@@ -77,5 +68,3 @@ async function printWeather() {
   console.log(`High:     ${fHigh} ˚F / ${cHigh} ˚C`);
   console.log(`Low:      ${fLow} ˚F / ${cLow} ˚C`);
 }
-
-printWeather();

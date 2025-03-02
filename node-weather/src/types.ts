@@ -4,7 +4,6 @@ export type WeatherData = {
     temperature2m: number;
   };
   daily: {
-    time: Date[];
     temperature2mMax: Float32Array<ArrayBuffer>;
     temperature2mMin: Float32Array<ArrayBuffer>;
   };
