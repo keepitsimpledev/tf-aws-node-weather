@@ -68,7 +68,7 @@ export async function weatherToString(): Promise<string> {
   let weather: string = "";
   weather += `Location:   ${LOCATION_NAME}\n`;
   // weather += `GMT:      ${metricWeather.current.time.toLocaleString('en-US', { timeZone: "GMT+0" })} GMT\n`;
-  weather += `Local Time: ${metricWeather.current.time.toLocaleString('en-US', { timeZone: LOCATION_TZ })}\n`;
+  weather += `Local Time: ${metricWeather.current.time.toLocaleString("en-US", { timeZone: LOCATION_TZ })}\n`;
   weather += `Current:    ${fCurrent} ˚F / ${cCurrent} ˚C\n`;
   weather += `High:       ${fHigh} ˚F / ${cHigh} ˚C\n`;
   weather += `Low:        ${fLow} ˚F / ${cLow} ˚C\n`;
