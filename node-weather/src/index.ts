@@ -1,3 +1,3 @@
-import { printWeather } from "./meteo"
+import { printWeather } from "./meteo";
 
 printWeather();
