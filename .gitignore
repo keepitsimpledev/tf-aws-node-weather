@@ -4,8 +4,7 @@
 # to not expose sensitive information:
 *.tfstate* 
 
-# node
+# ignore node build artifacts
+node-weather/coverage
 node_modules/
-
-# ignore build artifacts
 dist
