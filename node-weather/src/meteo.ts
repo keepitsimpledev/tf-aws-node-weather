@@ -15,7 +15,7 @@ export async function fetchWeather(
     current: "temperature_2m",
     daily: ["temperature_2m_max", "temperature_2m_min"],
     forecast_days: 1,
-    timezone: "America/New_York",
+    // timezone: LOCATION_TZ,
   };
 
   if (unitType == UnitType.Imperial) {
@@ -67,7 +67,6 @@ export async function weatherToString(): Promise<string> {
 
   let weather: string = "";
   weather += `Location:   ${LOCATION_NAME}\n`;
-  // weather += `GMT:      ${metricWeather.current.time.toLocaleString('en-US', { timeZone: "GMT+0" })} GMT\n`;
   weather += `Local Time: ${metricWeather.current.time.toLocaleString("en-US", { timeZone: LOCATION_TZ })}\n`;
   weather += `Current:    ${fCurrent} ˚F / ${cCurrent} ˚C\n`;
   weather += `High:       ${fHigh} ˚F / ${cHigh} ˚C\n`;
