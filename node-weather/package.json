@@ -8,7 +8,8 @@
     "hello": "npx tsc && node dist/src/index.js",
     "weather": "npx tsc && node dist/src/meteo.js",
     "fmt": "npx prettier . --write",
-    "check": "npx prettier . --check && npx eslint ."
+    "check": "npx prettier . --check",
+    "lint": "npx eslint ."
   },
   "keywords": [],
   "author": "",
