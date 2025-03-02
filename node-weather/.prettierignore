@@ -5,3 +5,5 @@ coverage
 *.js
 README.md
 tsconfig.json
+
+eslint.config.mjs

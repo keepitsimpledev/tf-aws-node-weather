@@ -21,4 +21,6 @@ jobs:
         cd node-weather
         npm install
         npm run check
+        npm run lint
         npm test
+

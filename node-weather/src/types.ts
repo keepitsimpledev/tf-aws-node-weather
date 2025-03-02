@@ -1,4 +1,4 @@
-type WeatherData = {
+export type WeatherData = {
   current: {
     time: Date;
     temperature2m: number;
@@ -10,7 +10,7 @@ type WeatherData = {
   };
 };
 
-type WeatherParameters = {
+export type WeatherParameters = {
   latitude: number;
   longitude: number;
   current: string;
@@ -22,7 +22,7 @@ type WeatherParameters = {
   forecast_days: number;
 };
 
-const enum UnitType {
+export const enum UnitType {
   Imperial,
   Metric,
 }

@@ -1,4 +1,5 @@
 import { fetchWeatherApi } from "openmeteo";
+import { UnitType, WeatherData, WeatherParameters } from "./types";
 
 const LOCATION_NAME = "Penn Station, NYC";
 const PENN_STATTION_LATITUDE = 40.78846;
@@ -7,7 +8,7 @@ const PENN_STATION_LONGITUDE = -73.386034;
 async function fetchWeather(
   unitType: UnitType = UnitType.Metric,
 ): Promise<WeatherData> {
-  let meteoApiParams: WeatherParameters = {
+  const meteoApiParams: WeatherParameters = {
     latitude: PENN_STATTION_LATITUDE,
     longitude: PENN_STATION_LONGITUDE,
     current: "temperature_2m",
