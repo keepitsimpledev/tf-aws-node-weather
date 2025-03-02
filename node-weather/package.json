@@ -1,12 +1,11 @@
 {
   "name": "weather",
   "version": "1.0.0",
-  "main": "dist/src/index.js",
+  "main": "dist/src/meteo.js",
   "scripts": {
     "test": "npx jest --coverage",
     "build": "npx tsc --build --clean && npx tsc",
-    "hello": "npx tsc && node dist/src/index.js",
-    "weather": "npx tsc && node dist/src/meteo.js",
+    "weather": "npx tsc && node dist/src/index.js",
     "fmt": "npx prettier . --write",
     "check": "npx prettier . --check",
     "lint": "npx eslint ."

@@ -49,7 +49,7 @@ export async function fetchWeather(
   return weatherData;
 }
 
-export async function printWeather() {
+export async function weatherToString(): Promise<string> {
   const metricWeather = await fetchWeather();
   const imperialWeather = await fetchWeather(UnitType.Imperial);
 
@@ -62,9 +62,16 @@ export async function printWeather() {
   const fLow = imperialWeather.daily.temperature2mMin[0].toFixed(1);
   const cLow = metricWeather.daily.temperature2mMin[0].toFixed(1);
 
-  console.log(`Location: ${LOCATION_NAME}`);
-  console.log(`Time:     ${metricWeather.current.time}`);
-  console.log(`Current:  ${fCurrent} ˚F / ${cCurrent} ˚C`);
-  console.log(`High:     ${fHigh} ˚F / ${cHigh} ˚C`);
-  console.log(`Low:      ${fLow} ˚F / ${cLow} ˚C`);
+  let weather: string = "";
+  weather += `Location: ${LOCATION_NAME}\n`;
+  weather += `Time:     ${metricWeather.current.time}\n`;
+  weather += `Current:  ${fCurrent} ˚F / ${cCurrent} ˚C\n`;
+  weather += `High:     ${fHigh} ˚F / ${cHigh} ˚C\n`;
+  weather += `Low:      ${fLow} ˚F / ${cLow} ˚C\n`;
+
+  return weather;
+}
+
+export async function printWeather() {
+  console.log(await weatherToString());
 }

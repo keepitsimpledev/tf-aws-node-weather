@@ -1,2 +1,3 @@
-const greeting: string = "Hello, GeeksforGeeks!";
-console.log(greeting);
+import { printWeather } from "./meteo"
+
+printWeather();
