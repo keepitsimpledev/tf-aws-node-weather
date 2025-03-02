@@ -49,7 +49,7 @@ export async function fetchWeather(
   return weatherData;
 }
 
-async function printWeather() {
+export async function printWeather() {
   const metricWeather = await fetchWeather();
   const imperialWeather = await fetchWeather(UnitType.Imperial);
 
