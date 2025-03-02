@@ -5,7 +5,7 @@ const LOCATION_NAME = "Penn Station, NYC";
 const PENN_STATTION_LATITUDE = 40.78846;
 const PENN_STATION_LONGITUDE = -73.386034;
 
-async function fetchWeather(
+export async function fetchWeather(
   unitType: UnitType = UnitType.Metric,
 ): Promise<WeatherData> {
   const meteoApiParams: WeatherParameters = {
