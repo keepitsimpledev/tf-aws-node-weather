@@ -14,6 +14,7 @@ export async function fetchWeather(
     current: "temperature_2m",
     daily: ["temperature_2m_max", "temperature_2m_min"],
     forecast_days: 1,
+    timezone: "America/New_York"
   };
 
   if (unitType == UnitType.Imperial) {
@@ -30,6 +31,7 @@ export async function fetchWeather(
 
   // Attributes for timezone and location
   const utcOffsetSeconds = response.utcOffsetSeconds();
+  console.log("utcOffsetSeconds: " + utcOffsetSeconds);
 
   const current = response.current()!;
   const daily = response.daily()!;
