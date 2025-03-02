@@ -11,4 +11,4 @@ uses open-source weather data: https://open-meteo.com/en/docs
   $ npm install
   $ npm run weather
   ```
-* further usage, see "scripts" in `package.json
+* further usage, see "scripts" in `package.json`
