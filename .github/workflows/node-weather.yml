@@ -7,7 +7,7 @@ env:
 
 jobs:
   test:
-    environment: dev
+    environment: dev # this and other github environments are configured in Settings > Environments
     runs-on: ubuntu-22.04
 
     steps:
@@ -26,7 +26,7 @@ jobs:
         npm run check
         npm test
     
-    - name: check envar
+    - name: check envar # secrets (Environment secrets) and vars (Environment variables) are configured in the github environment
       run: |
         echo "OUR_LITTLE_SECRET: ${{ secrets.OUR_LITTLE_SECRET }}"
         echo "vars.MY_TITLE: ${{ vars.MY_TITLE }}"
