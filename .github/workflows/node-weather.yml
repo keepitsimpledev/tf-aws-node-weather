@@ -7,7 +7,7 @@ env:
 
 jobs:
   test:
-
+    environment: dev
     runs-on: ubuntu-22.04
 
     steps:
@@ -29,4 +29,4 @@ jobs:
     - name: check envar
       run: |
         echo "OUR_LITTLE_SECRET: ${{ secrets.OUR_LITTLE_SECRET }}"
-        echo "env.MY_TITLE: ${{ vars.MY_TITLE }}"
+        echo "vars.MY_TITLE: ${{ vars.MY_TITLE }}"
