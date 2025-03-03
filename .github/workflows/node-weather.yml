@@ -29,5 +29,5 @@ jobs:
     - name: check envar
       run: |
         echo "OUR_LITTLE_SECRET: ${{ secrets.OUR_LITTLE_SECRET }}"
-        echo "MY_TITLE: ${{ MY_TITLE }}"
         echo "env.MY_TITLE: ${{ env.MY_TITLE }}"
+#        echo "MY_TITLE: ${{ MY_TITLE }}"
