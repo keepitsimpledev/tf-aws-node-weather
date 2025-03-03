@@ -28,4 +28,4 @@ jobs:
     
     - name: check envar
       run: |
-        echo ${{ MY_TITLE }}
+        echo ${{ env.MY_TITLE }}
