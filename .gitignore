@@ -4,6 +4,9 @@
 # to not expose sensitive information:
 *.tfstate* 
 
+# ignore tf build artifacts
+tf-lambda/build
+
 # ignore node build artifacts
 node-weather/coverage
 node_modules/
