@@ -33,7 +33,7 @@ resource "aws_iam_role" "iam_for_lambda" {
 
 # data "archive_file" "lambda" {
 #   type        = "zip"
-#   source_file = "../node-weather/dist/src/app.js"
+#   source_file = "../node-weather/dist/src/app.js" # TODO: explore if this can take a list
 #   output_path = "build/lambda_function_payload.zip"
 # }
 
