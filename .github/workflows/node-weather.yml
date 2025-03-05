@@ -38,7 +38,6 @@ jobs:
         cp -r node_modules/ dist/src/
         cd dist/src/
         mkdir ../../../tf-lambda/build
-        sudo apt install zip -y
         zip ../../../tf-lambda/build/lambda_weather_function.zip *
         cd ../../../tf-lambda
         ls build/
