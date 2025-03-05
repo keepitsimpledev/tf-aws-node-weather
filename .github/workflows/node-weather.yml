@@ -30,3 +30,17 @@ jobs:
       run: |
         echo "OUR_LITTLE_SECRET: ${{ secrets.OUR_LITTLE_SECRET }}"
         echo "vars.MY_TITLE: ${{ vars.MY_TITLE }}"
+
+    - name: deploy lambda
+      run: |
+        cd node-weather
+        npm run build
+        cp -r node_modules/ dist/src/
+        cd dist/src/
+        mkdir ../../../tf-lambda/build
+        sudo apt install zip -y
+        zip ../../../tf-lambda/build/lambda_weather_function.zip *
+        cd ../../../tf-lambda
+        ls build/
+#        terraform apply --auto-approve
+# TODO: figure out how to keep tf.state in AWS

@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.16"
+      version = "~> 5.0"
     }
   }
 
@@ -31,23 +31,24 @@ resource "aws_iam_role" "iam_for_lambda" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
-data "archive_file" "lambda" {
-  type        = "zip"
-  source_file = "../node-weather/dist/src/app.js"
-  output_path = "build/lambda_function_payload.zip"
-}
+# data "archive_file" "lambda" {
+#   type        = "zip"
+#   source_file = "../node-weather/dist/src/app.js"
+#   output_path = "build/lambda_function_payload.zip"
+# }
 
 resource "aws_lambda_function" "test_lambda" {
   # If the file is not in the current working directory you will need to include a
   # path.module in the filename.
-  filename      = "build/lambda_function_payload.zip"
-  function_name = "lambda_function_name"
+  filename      = "build/lambda_weather_function.zip"
+  function_name = "fetch_weather"
   role          = aws_iam_role.iam_for_lambda.arn
-  handler       = "app.lambdaHandler"
+  handler       = "index.lambdaHandler"
 
-  source_code_hash = data.archive_file.lambda.output_base64sha256
+  # i think we need this so that terraform can tell when the source code was updated:
+  # source_code_hash = data.archive_file.lambda.output_base64sha256
 
-  runtime = "nodejs16.x"
+  runtime = "nodejs22.x"
 
 #   environment {
 #     variables = {
