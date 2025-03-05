@@ -33,9 +33,11 @@ jobs:
 
     - name: deploy lambda
       run: |
-        pwd
+        # TODO: check for AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+        echo "BEGIN: build node artifacts"
         cd node-weather
-        # npm run build # check if this is done already in stage `npm install and test`
+        npm run build
+        echo "END: build node artifacts"
         echo "BEGIN: packaging lambda"
         cp -r node_modules/ dist/src/
         cd dist/src/
