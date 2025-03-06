@@ -38,11 +38,11 @@ resource "aws_iam_role" "iam_for_lambda" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
-# data "archive_file" "lambda" {
-#   type        = "zip"
-#   source_file = "../node-weather/dist/src/app.js" # TODO: explore if this can take a list
-#   output_path = "build/lambda_function_payload.zip"
-# }
+data "archive_file" "lambda" {
+  type        = "zip"
+  source_dir  = "../node-weather/dist/src/"  
+  output_path = "build/lambda_function_payload.zip"
+}
 
 resource "aws_lambda_function" "test_lambda" {
   # If the file is not in the current working directory you will need to include a
@@ -52,8 +52,7 @@ resource "aws_lambda_function" "test_lambda" {
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "index.lambdaHandler"
 
-  # i think we need this so that terraform can tell when the source code was updated:
-  # source_code_hash = data.archive_file.lambda.output_base64sha256
+  source_code_hash = data.archive_file.lambda.output_base64sha256
 
   runtime = "nodejs22.x"
 
