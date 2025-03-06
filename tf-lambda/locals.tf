@@ -1,3 +1,3 @@
 locals {
-  region = "eu-north-1"
+  region = "eu-north-1" # ensure this is aligned with terraform.backend.region
 }
