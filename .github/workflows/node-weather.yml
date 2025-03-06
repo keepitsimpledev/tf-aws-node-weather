@@ -33,5 +33,6 @@ jobs:
 
     - name: deploy lambda
       run: |
-        bash ci-cd/confirm-creds.sh ${{ secrets.AKI }} ${{ secrets.SAK }}
+        export AWS_ACCESS_KEY_ID=${{ secrets.AKI }} # TODO: evaluate security of this pattern
+        export AWS_SECRET_ACCESS_KEY=${{ secrets.SAK }}
         bash ci-cd/deploy-lambda.sh
