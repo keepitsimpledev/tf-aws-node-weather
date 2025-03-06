@@ -20,11 +20,12 @@ jobs:
 
     - name: npm install and test
       run: |
-        cd node-weather
+        pushd node-weather
         npm install
         npm run lint
         npm run check
         npm test
+        popd
     
     - name: check envar # secrets (Environment secrets) and vars (Environment variables) are configured in the github environment
       run: |

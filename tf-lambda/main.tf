@@ -6,7 +6,7 @@ terraform {
     }
   }
 
-  # this bucket is not managed in this project (this one was manually created)
+  # this bucket is not managed in this project - it was manually created
   backend "s3" {
     bucket = "kis-node-weather"
     key    = "terraform/state"
