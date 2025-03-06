@@ -1,5 +1,7 @@
 name: Node Github CI
 
+# TODO: this is UNTESTED - apparently won't work until merged to default branch
+# https://github.com/orgs/community/discussions/25219
 on: workflow_dispatch
 
 jobs:
