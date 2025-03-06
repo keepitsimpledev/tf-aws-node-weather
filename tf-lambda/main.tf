@@ -41,7 +41,7 @@ resource "aws_iam_role" "iam_for_lambda" {
 data "archive_file" "lambda" {
   type        = "zip"
   source_dir  = "../node-weather/dist/src/"  
-  output_path = "build/lambda_function_payload.zip"
+  output_path = "build/lambda_weather_function.zip"
 }
 
 resource "aws_lambda_function" "test_lambda" {
