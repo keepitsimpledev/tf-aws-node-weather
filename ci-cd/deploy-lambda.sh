@@ -12,5 +12,6 @@ cp -r node_modules/dist/src/
 # echo "END: packaging lambda"
 # cd ../../../tf-lambda
 # ls build/
+cd tf-lambda
 terraform init # is it appropriate to have this here?
 terraform apply --auto-approve
