@@ -21,7 +21,6 @@ let response: APIGatewayProxyResult;
  */
 // exports.lambdaHandler = async (event : APIGatewayProxyEvent , context: APIGatewayEventRequestContext) => {
 exports.lambdaHandler = async () => {
-  console.log("test lambda log");
   try {
     response = {
       statusCode: 200,
