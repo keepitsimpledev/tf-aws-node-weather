@@ -4,6 +4,12 @@
 if [ -z ${AKI+x} ]; then echo "AKI is unset"; else echo "AKI is set to '$AKI'"; fi
 if [ -z ${SAK+x} ]; then echo "SAK is unset"; else echo "SAK is set to '$SAK'"; fi
 
+echo '$0:'
+echo $0
+echo '$1:'
+echo $1
+echo '$2:'
+echo $2
 
 # echo "BEGIN: build node artifacts"
 # cd node-weather

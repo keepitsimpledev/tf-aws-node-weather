@@ -33,4 +33,4 @@ jobs:
 
     - name: deploy lambda
       run: |
-        bash ci-cd/deploy-lambda.sh
+        bash ci-cd/deploy-lambda.sh ${{ secrets.AKI }} ${{ secrets.SAK }}
