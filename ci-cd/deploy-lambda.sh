@@ -12,5 +12,4 @@ zip -rq ../../../tf-lambda/build/lambda_weather_function.zip *
 echo "END: packaging lambda"
 cd ../../../tf-lambda
 ls build/
-terraform init
 terraform apply --auto-approve
