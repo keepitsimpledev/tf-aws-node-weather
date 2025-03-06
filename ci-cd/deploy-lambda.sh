@@ -1,12 +1,12 @@
 #!/bin/bash
 
 echo "BEGIN: build node artifacts"
-pushd node-weather
+pushd node-weather/
 npm run build
+cp -r node_modules/ dist/src/
 popd
 echo "END: build node artifacts"
 # echo "BEGIN: packaging lambda"
-cp -r node_modules/ dist/src/
 # mkdir ../tf-lambda/build
 # cd dist/src/
 # zip -rq ../../../tf-lambda/build/lambda_weather_function.zip *
