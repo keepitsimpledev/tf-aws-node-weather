@@ -10,14 +10,14 @@ terraform {
   backend "s3" {
     bucket = "kis-node-weather"
     key    = "terraform/state"
-    region = "eu-north-1" # TODO: move to tfvars
+    region = locals.region
   }
 
   required_version = ">= 1.2.0"
 }
 
 provider "aws" {
-  region = "eu-north-1"
+  region = locals.region
 }
 
 data "aws_iam_policy_document" "assume_role" {
