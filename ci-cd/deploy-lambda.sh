@@ -1,8 +1,9 @@
 #!/bin/bash
 
 echo "BEGIN: build node artifacts"
-cd node-weather
+pushd node-weather
 npm run build
+popd
 echo "END: build node artifacts"
 # echo "BEGIN: packaging lambda"
 cp -r node_modules/ dist/src/
@@ -12,6 +13,9 @@ cp -r node_modules/ dist/src/
 # echo "END: packaging lambda"
 # cd ../../../tf-lambda
 # ls build/
-cd tf-lambda
+echo "BEGIN: terraform deploy"
+pushd tf-lambda
 terraform init # is it appropriate to have this here?
 terraform apply --auto-approve
+popd
+echo "END: terraform deploy"
