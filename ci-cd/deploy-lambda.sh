@@ -8,7 +8,7 @@ echo "BEGIN: packaging lambda"
 cp -r node_modules/ dist/src/
 mkdir ../tf-lambda/build
 cd dist/src/
-zip -r ../../../tf-lambda/build/lambda_weather_function.zip *
+zip -rq ../../../tf-lambda/build/lambda_weather_function.zip *
 echo "END: packaging lambda"
 cd ../../../tf-lambda
 ls build/
