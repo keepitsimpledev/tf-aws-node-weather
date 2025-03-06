@@ -6,6 +6,13 @@ terraform {
     }
   }
 
+  # this bucket is not managed in this project (this one was manually created)
+  backend "s3" {
+    bucket = "kis-node-weather"
+    key    = "terraform/state"
+    region = "eu-north-1"
+  }
+
   required_version = ">= 1.2.0"
 }
 
