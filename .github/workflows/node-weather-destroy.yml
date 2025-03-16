@@ -1,4 +1,4 @@
-name: Node Github CI
+name: node-weather-destroy.yml
 
 # note: workflow_dispatch is only recognized by github after merging to main
 # https://github.com/orgs/community/discussions/25219
