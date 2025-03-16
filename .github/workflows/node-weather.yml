@@ -1,6 +1,6 @@
 name: Node Github CI
 
-on: [push]
+on: [push, workflow_dispatch]
 
 env:
   NODE_VERSION: "22.14.0"
@@ -36,4 +36,4 @@ jobs:
       run: |
         export AWS_ACCESS_KEY_ID=${{ secrets.AKI }} # TODO: evaluate security of this pattern
         export AWS_SECRET_ACCESS_KEY=${{ secrets.SAK }}
-        bash ci-cd/deploy-lambda.sh
+        bash ci-cd/tf-lambda.sh apply
