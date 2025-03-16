@@ -1,6 +1,4 @@
 import {
-  // APIGatewayProxyEvent,
-  // APIGatewayEventRequestContext,
   APIGatewayProxyResult,
 } from "aws-lambda";
 import { fetchWeather } from "./meteo";
@@ -8,7 +6,9 @@ import { fetchWeather } from "./meteo";
 let response: APIGatewayProxyResult;
 
 /**
- *
+ * sample signature:
+ * exports.lambdaHandler = async (event : APIGatewayProxyEvent , context: APIGatewayEventRequestContext) => { ... }
+ * 
  * Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
  * @param {Object} event - API Gateway Lambda Proxy Input Format
  *
@@ -19,7 +19,6 @@ let response: APIGatewayProxyResult;
  * @returns {Object} object - API Gateway Lambda Proxy Output Format
  * ß
  */
-// exports.lambdaHandler = async (event : APIGatewayProxyEvent , context: APIGatewayEventRequestContext) => {
 exports.lambdaHandler = async () => {
   try {
     response = {
