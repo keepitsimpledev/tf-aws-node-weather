@@ -9,7 +9,7 @@ echo "END: build node artifacts"
 
 echo "BEGIN: terraform deploy"
 pushd tf-lambda/
-terraform init # is it appropriate to have this here?
+terraform init
 terraform apply --auto-approve
 popd
 echo "END: terraform deploy"

@@ -1,6 +1,6 @@
-name: Node Github CI
+name: node-weather-destroy.yml
 
-# TODO: this is UNTESTED - apparently won't work until merged to default branch
+# note: workflow_dispatch is only recognized by github after merging to default branch
 # https://github.com/orgs/community/discussions/25219
 on: workflow_dispatch
 
@@ -12,13 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: deploy lambda
+    - name: destroy lambda
       run: |
         export AWS_ACCESS_KEY_ID=${{ secrets.AKI }} # TODO: evaluate security of this pattern
         export AWS_SECRET_ACCESS_KEY=${{ secrets.SAK }}
-        pushd tf-lambda/
-        echo "BEGIN: terraform destroy"
-        terraform init
-        terraform destroy --auto-approve
-        echo "END: terraform destroy"
-        popd
+        bash ci-cd/destroy-lambda.sh
