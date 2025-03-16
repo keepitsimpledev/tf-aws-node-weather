@@ -1,0 +1,24 @@
+name: Node Github CI
+
+# TODO: this is UNTESTED - apparently won't work until merged to default branch
+# https://github.com/orgs/community/discussions/25219
+on: workflow_dispatch
+
+jobs:
+  test:
+    environment: dev # this and other github environments are configured in Settings > Environments
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: deploy lambda
+      run: |
+        export AWS_ACCESS_KEY_ID=${{ secrets.AKI }} # TODO: evaluate security of this pattern
+        export AWS_SECRET_ACCESS_KEY=${{ secrets.SAK }}
+        pushd tf-lambda/
+        echo "BEGIN: terraform destroy"
+        terraform init
+        terraform destroy --auto-approve
+        echo "END: terraform destroy"
+        popd

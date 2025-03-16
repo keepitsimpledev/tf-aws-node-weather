@@ -7,20 +7,33 @@ env:
 
 jobs:
   test:
-
+    environment: dev # this and other github environments are configured in Settings > Environments
     runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Use Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ env.NODE_VERSION }}
+
     - name: npm install and test
       run: |
-        cd node-weather
+        pushd node-weather
         npm install
         npm run lint
         npm run check
         npm test
+        popd
+    
+    - name: check envar # secrets (Environment secrets) and vars (Environment variables) are configured in the github environment
+      run: |
+        echo "OUR_LITTLE_SECRET: ${{ secrets.OUR_LITTLE_SECRET }}"
+        echo "vars.MY_TITLE: ${{ vars.MY_TITLE }}"
 
+    - name: deploy lambda
+      run: |
+        export AWS_ACCESS_KEY_ID=${{ secrets.AKI }} # TODO: evaluate security of this pattern
+        export AWS_SECRET_ACCESS_KEY=${{ secrets.SAK }}
+        bash ci-cd/deploy-lambda.sh
