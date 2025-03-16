@@ -18,4 +18,7 @@ terraform {
 
 provider "aws" {
   region = local.region
+  # should i do this?:
+  # access_key = "your-access-key"
+  # secret_key = "your-secret-key"
 }
