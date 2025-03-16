@@ -1,6 +1,6 @@
 name: node-weather-destroy.yml
 
-# note: workflow_dispatch is only recognized by github after merging to main
+# note: workflow_dispatch is only recognized by github after merging to default branch
 # https://github.com/orgs/community/discussions/25219
 on: workflow_dispatch
 
