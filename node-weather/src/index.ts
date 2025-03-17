@@ -1,5 +1,5 @@
 import { APIGatewayProxyResult } from "aws-lambda";
-import { fetchWeather } from "./meteo";
+import { getPayload } from "./cache";
 
 let response: APIGatewayProxyResult;
 
@@ -22,7 +22,7 @@ exports.lambdaHandler = async () => {
     response = {
       statusCode: 200,
       body: JSON.stringify({
-        message: await fetchWeather(),
+        message: await getPayload(),
       }),
     };
   } catch (err) {

@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@openmeteo/sdk": "^1.19.0",
-    "openmeteo": "^1.1.5"
+    "openmeteo": "^1.1.5",
+    "redis": "^4.7.0"
   }
 }
