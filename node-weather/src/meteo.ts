@@ -1,7 +1,6 @@
 import { fetchWeatherApi } from "openmeteo";
 import { UnitType, WeatherData, WeatherParameters } from "./types";
 
-
 const LOCATION_NAME = "Penn Station, NYC";
 const LOCATION_TZ = "America/New_York";
 const PENN_STATTION_LATITUDE = 40.78846;
