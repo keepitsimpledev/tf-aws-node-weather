@@ -31,4 +31,13 @@ resource "aws_lambda_function" "weather_lambda" {
   source_code_hash = data.archive_file.lambda.output_base64sha256
 
   runtime = "nodejs22.x"
+
+  environment {
+    variables = {
+      cache_host = aws_elasticache_cluster.project_cache.cache_nodes[0].address
+      # TODO: implement
+      cache_username = ""
+      cache_auth_token = ""
+    }
+  }
 }

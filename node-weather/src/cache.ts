@@ -4,7 +4,7 @@ import { createRedisAdapter } from "./redis-adapter";
 import { fetchWeather } from "./meteo";
 
 // TODO: configure these:
-const REDIS_URL = process.env.REDIS_URL || "";
+const REDIS_URL = process.env.REDIS_URL || ""; // use tf variables.cache_host
 const REDIS_USERNAME = process.env.REDIS_USERNAME || "";
 const REDIS_AUTH_TOKEN = process.env.REDIS_AUTH_TOKEN || "";
 const KEY_CACHED_WEATHER = "WEATHER_CACHE"; // TODO: move weather-related behavior out of this class

@@ -14,7 +14,7 @@ resource "aws_security_group" "cache_sg" {
 
 # this take ~10m to apply, ~5m to destroy
 resource "aws_elasticache_cluster" "project_cache" {
-  cluster_id           = "project_cache_id"
+  cluster_id           = "project-cache-id"
   engine               = "redis"
   node_type            = "cache.t3.micro"  # Choose a suitable instance type based on your needs
   num_cache_nodes      = 1
