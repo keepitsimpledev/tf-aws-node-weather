@@ -1,5 +1,5 @@
 import { APIGatewayProxyResult } from "aws-lambda";
-import { getPayload } from "./cache";
+import { doCache } from "./cache2";
 
 let response: APIGatewayProxyResult;
 
@@ -22,7 +22,7 @@ exports.lambdaHandler = async () => {
     response = {
       statusCode: 200,
       body: JSON.stringify({
-        message: await getPayload(),
+        message: await doCache(),
       }),
     };
   } catch (err) {
