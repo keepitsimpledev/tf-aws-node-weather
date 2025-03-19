@@ -34,8 +34,8 @@ resource "aws_lambda_function" "weather_lambda" {
 
   environment {
     variables = {
-      cache_host = aws_elasticache_cluster.project_cache.cluster_address
-      # cache_host = aws_elasticache_cluster.project_cache.cache_nodes[0].address
+      # cache_host = aws_elasticache_cluster.project_cache.cluster_address
+      cache_host = aws_elasticache_cluster.project_cache.cache_nodes[0].address
       cache_port = aws_elasticache_cluster.project_cache.port
       # TODO: implement
       cache_username = ""
