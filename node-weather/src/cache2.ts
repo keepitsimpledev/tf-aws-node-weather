@@ -22,7 +22,7 @@ export const getValue = async (key: string): Promise<string | null> => {
 export async function doCache(): Promise<string> {
   console.log(`CACHE_HOST: ${CACHE_HOST}`);
   console.log(`CACHE_PORT: ${CACHE_PORT}`);
-  
+
   // Connect to Redis
   console.log(`connecting to redis client`);
   await redisClient.connect();
