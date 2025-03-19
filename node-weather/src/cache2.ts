@@ -1,11 +1,13 @@
-import { createClient } from 'redis';
+import { createClient } from "redis";
 
 const CACHE_HOST = process.env.cache_host;
 const CACHE_PORT = process.env.cache_port;
 
 // Create and configure Redis client
-const redisClient = createClient({ url: `redis://${CACHE_HOST}:${CACHE_PORT}` });
-redisClient.on('error', (err) => console.log('Redis Client Error', err));
+const redisClient = createClient({
+  url: `redis://${CACHE_HOST}:${CACHE_PORT}`,
+});
+redisClient.on("error", (err) => console.log("Redis Client Error", err));
 
 // Function to set a key-value pair in Redis
 export const setValue = async (key: string, value: string): Promise<void> => {
@@ -18,14 +20,14 @@ export const getValue = async (key: string): Promise<string | null> => {
 };
 
 export async function doCache(): Promise<string> {
-    // Connect to Redis
-    await redisClient.connect();
+  // Connect to Redis
+  await redisClient.connect();
 
-    console.log(`CACHE_HOST: ${CACHE_HOST}`);
-    console.log(`CACHE_PORT: ${CACHE_PORT}`);
-    console.log(`getKenny: ${await getValue("kennay")}`);
-    await setValue("kennay", "Cat");
-    console.log(`getKenny: ${await getValue("kennay")}`);
+  console.log(`CACHE_HOST: ${CACHE_HOST}`);
+  console.log(`CACHE_PORT: ${CACHE_PORT}`);
+  console.log(`getKenny: ${await getValue("kennay")}`);
+  await setValue("kennay", "Cat");
+  console.log(`getKenny: ${await getValue("kennay")}`);
 
-    return "done";
+  return "done";
 }
