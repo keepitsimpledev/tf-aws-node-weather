@@ -24,6 +24,9 @@ resource "aws_elasticache_cluster" "project_cache" {
   port                 = 6379
 
   security_group_ids   = [aws_security_group.cache_sg.id]  # Associate the Redis cluster with the custom security group
+
+  # vpc config
+  subnet_group_name    = aws_elasticache_subnet_group.project_cache_subnet.name
 }
 
 # vpc config
