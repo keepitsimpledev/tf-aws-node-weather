@@ -25,3 +25,9 @@ resource "aws_elasticache_cluster" "project_cache" {
 
   security_group_ids   = [aws_security_group.cache_sg.id]  # Associate the Redis cluster with the custom security group
 }
+
+# vpc config
+resource "aws_elasticache_subnet_group" "project_cache_subnet" {
+  name       = "project-cache-subnet"
+  subnet_ids = [aws_subnet.subnet_private.id]
+}
