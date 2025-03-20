@@ -34,8 +34,8 @@ resource "aws_lambda_function" "weather_lambda" {
   runtime = "nodejs22.x"
 
   vpc_config {
-    subnet_ids         = [aws_subnet.subnet_private.id]
-    security_group_ids = [aws_default_security_group.default_security_group.id]
+    subnet_ids         = [aws_elasticache_cluster.subnet_id]
+    security_group_ids = [aws_elasticache_cluster.security_group_ids]
   }
 
   environment {
