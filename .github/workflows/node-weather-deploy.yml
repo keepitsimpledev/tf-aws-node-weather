@@ -32,7 +32,7 @@ jobs:
         echo "OUR_LITTLE_SECRET: ${{ secrets.OUR_LITTLE_SECRET }}"
         echo "vars.MY_TITLE: ${{ vars.MY_TITLE }}"
 
-    - name: deploy lambda # TODO: ensure this fails if deployment fails
+    - name: deploy lambda
       run: |
         export AWS_ACCESS_KEY_ID=${{ secrets.AKI }} # TODO: evaluate security of this pattern
         export AWS_SECRET_ACCESS_KEY=${{ secrets.SAK }}
