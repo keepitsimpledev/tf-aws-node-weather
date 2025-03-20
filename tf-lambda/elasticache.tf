@@ -1,16 +1,16 @@
 # example from: https://dev.to/giasuddin90/creating-an-aws-elasticache-redis-cluster-using-terraform-eb6
 
-resource "aws_security_group" "cache_sg" {
-  name        = "cache-security-group"
-  description = "Security group for Redis cluster"
+# resource "aws_security_group" "cache_sg" {
+#   name        = "cache-security-group"
+#   description = "Security group for Redis cluster"
 
-  ingress {
-    from_port   = 6379
-    to_port     = 6379
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Open to all; consider restricting to specific IPs for better security
-  }
-}
+#   ingress {
+#     from_port   = 6379
+#     to_port     = 6379
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]  # Open to all; consider restricting to specific IPs for better security
+#   }
+# }
 
 # this take ~10m to apply, ~5m to destroy
 resource "aws_elasticache_cluster" "project_cache" {
@@ -23,5 +23,6 @@ resource "aws_elasticache_cluster" "project_cache" {
   apply_immediately    = true
   port                 = 6379
 
-  security_group_ids   = [aws_security_group.cache_sg.id]  # Associate the Redis cluster with the custom security group
+  # security_group_ids   = [aws_security_group.cache_sg.id]  # Associate the Redis cluster with the custom security group
+  security_group_ids = [aws_default_security_group.default_security_group.id]
 }
