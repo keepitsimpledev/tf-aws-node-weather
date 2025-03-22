@@ -12,16 +12,9 @@ resource "aws_security_group" "cache_sg" {
   }
 }
 
-resource "aws_subnet" "private_cache_subnet" {
-  vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = "10.0.8.0/21"
-  map_public_ip_on_launch = false
-}
-
 resource "aws_elasticache_subnet_group" "default" {
   name        = "cache-subnet-group"
-  description = "Private subnets for the ElastiCache instance"
-  subnet_ids  = [aws_subnet.private_cache_subnet.id]
+  subnet_ids  = [aws_subnet.subnet_private.id]
 }
 
 # this take ~10m to apply, ~5m to destroy
