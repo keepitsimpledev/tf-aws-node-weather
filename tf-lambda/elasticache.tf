@@ -4,6 +4,8 @@ resource "aws_security_group" "cache_sg" {
   name        = "cache-security-group"
   description = "Security group for Redis cluster"
 
+  vpc_id = aws_vpc.vpc.id
+
   ingress {
     from_port   = 6379
     to_port     = 6379
