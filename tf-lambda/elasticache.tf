@@ -1,16 +1,28 @@
-# example from: https://dev.to/giasuddin90/creating-an-aws-elasticache-redis-cluster-using-terraform-eb6
+# examples from https://dev.to/giasuddin90/creating-an-aws-elasticache-redis-cluster-using-terraform-eb6
+# and https://github.com/udaysharma/terraform-aws-redis-lambda/tree/master
+resource "aws_security_group" "cache_sg" {
+  name        = "cache-security-group"
+  description = "Security group for Redis cluster"
 
-# resource "aws_security_group" "cache_sg" {
-#   name        = "cache-security-group"
-#   description = "Security group for Redis cluster"
+  ingress {
+    from_port   = 6379
+    to_port     = 6379
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # Open to all; consider restricting to specific IPs for better security
+  }
+}
 
-#   ingress {
-#     from_port   = 6379
-#     to_port     = 6379
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]  # Open to all; consider restricting to specific IPs for better security
-#   }
-# }
+resource "aws_subnet" "private_cache_subnet" {
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = "10.0.8.0/21"
+  map_public_ip_on_launch = false
+}
+
+resource "aws_elasticache_subnet_group" "default" {
+  name        = "cache-subnet-group"
+  description = "Private subnets for the ElastiCache instance"
+  subnet_ids  = [aws_subnet.private_cache_subnet.id]
+}
 
 # this take ~10m to apply, ~5m to destroy
 resource "aws_elasticache_cluster" "project_cache" {
@@ -23,6 +35,8 @@ resource "aws_elasticache_cluster" "project_cache" {
   apply_immediately    = true
   port                 = 6379
 
-  # security_group_ids   = [aws_security_group.cache_sg.id]  # Associate the Redis cluster with the custom security group
-  security_group_ids = [aws_default_security_group.default_security_group.id]
+  subnet_group_name    = aws_elasticache_subnet_group.default.name
+  security_group_ids   = [aws_security_group.cache_sg.id]
 }
+
+# consider: https://github.com/terraform-aws-modules/terraform-aws-lambda/blob/v7.20.1/examples/with-vpc/main.tf
