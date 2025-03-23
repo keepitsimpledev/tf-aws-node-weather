@@ -5,9 +5,9 @@ const CACHE_HOST = process.env.cache_host;
 const CACHE_PORT = process.env.cache_port;
 
 // Create and configure Redis client
+const cacheHost: string = `redis://${CACHE_HOST}:${CACHE_PORT}`;
 const redisClient = createClient({
-  url: `${CACHE_HOST}:${CACHE_PORT}`,
-  // url: `redis://${CACHE_HOST}:${CACHE_PORT}`,
+  url: cacheHost,
 });
 redisClient.on("error", (err) => console.log("Redis Client Error", err));
 
@@ -24,6 +24,7 @@ export const getValue = async (key: string): Promise<string | null> => {
 export async function doCache(): Promise<string> {
   console.log(`CACHE_HOST: ${CACHE_HOST}`);
   console.log(`CACHE_PORT: ${CACHE_PORT}`);
+  console.log(`cacheHost: ${cacheHost}`);
 
   // Connect to Redis
   console.log(`connecting to redis client`);
