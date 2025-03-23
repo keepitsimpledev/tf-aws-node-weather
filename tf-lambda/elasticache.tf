@@ -32,6 +32,22 @@ resource "aws_elasticache_cluster" "project_cache" {
 
   subnet_group_name    = aws_elasticache_subnet_group.default.name
   security_group_ids   = [aws_security_group.cache_sg.id]
+
+  log_delivery_configuration {
+    destination      = aws_cloudwatch_log_group.cache_logs.name
+    destination_type = "cloudwatch-logs"
+    log_format       = "text"
+    log_type         = "slow-log"
+  }
+}
+
+resource "aws_cloudwatch_log_group" "cache_logs" {
+  name = "cache-logs"
+
+  tags = {
+    Environment = "dev"
+    Application = "node-weather"
+  }
 }
 
 # consider: https://github.com/terraform-aws-modules/terraform-aws-lambda/blob/v7.20.1/examples/with-vpc/main.tf
