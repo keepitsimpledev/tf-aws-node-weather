@@ -1,4 +1,4 @@
-name: node-weather-deploy.yml
+name: node-weather.yml # TODO: rename to node-weather-deploy.yml before merging
 
 on: [push, workflow_dispatch]
 
