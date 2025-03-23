@@ -1,3 +1,4 @@
+// https://medium.com/@alessandro.traversi/integrating-redis-with-typescript-using-the-official-redis-library-9cf121da3fb9
 import { createClient } from "redis";
 
 const CACHE_HOST = process.env.cache_host;
@@ -5,7 +6,8 @@ const CACHE_PORT = process.env.cache_port;
 
 // Create and configure Redis client
 const redisClient = createClient({
-  url: `redis://${CACHE_HOST}:${CACHE_PORT}`,
+  url: `${CACHE_HOST}:${CACHE_PORT}`,
+  // url: `redis://${CACHE_HOST}:${CACHE_PORT}`,
 });
 redisClient.on("error", (err) => console.log("Redis Client Error", err));
 
