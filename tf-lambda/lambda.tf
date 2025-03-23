@@ -27,14 +27,14 @@ resource "aws_lambda_function" "weather_lambda" {
   function_name = "fetch_weather"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "index.lambdaHandler"
-  timeout       = 15 # TODO: reconsider value
+  timeout       = 10 # TODO: reconsider value
 
   source_code_hash = data.archive_file.lambda.output_base64sha256
 
   runtime = "nodejs22.x"
 
   vpc_config {
-    subnet_ids         = [aws_subnet.subnet_public.id]
+    subnet_ids         = [aws_subnet.subnet_private.id]
     security_group_ids = [aws_security_group.cache_sg.id]
   }
 

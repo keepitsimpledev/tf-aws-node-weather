@@ -16,7 +16,7 @@ resource "aws_security_group" "cache_sg" {
 
 resource "aws_elasticache_subnet_group" "default" {
   name        = "cache-subnet-group"
-  subnet_ids  = [aws_subnet.subnet_public.id]
+  subnet_ids  = [aws_subnet.subnet_private.id]
 }
 
 # this take ~10m to apply, ~5m to destroy

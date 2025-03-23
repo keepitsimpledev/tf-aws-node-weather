@@ -29,6 +29,7 @@ resource "aws_route_table_association" "route_table_association_public" {
 
 resource "aws_eip" "eip" {
   # vpc        = true # deprecated
+  domain = "vpc"
   depends_on = [aws_internet_gateway.internet_gateway]
 }
 
