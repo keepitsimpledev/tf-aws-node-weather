@@ -29,7 +29,7 @@ resource "aws_route_table_association" "route_table_association_public" {
 
 resource "aws_eip" "eip" {
   # vpc        = true # deprecated
-  domain = "vpc"
+  domain = "vpc" # `vpc = true` is deprecated
   depends_on = [aws_internet_gateway.internet_gateway]
 }
 
@@ -77,25 +77,6 @@ resource "aws_default_network_acl" "default_network_acl" {
     cidr_block = "0.0.0.0/0"
     from_port  = 0
     to_port    = 0
-  }
-}
-
-resource "aws_default_security_group" "default_security_group" {
-  vpc_id = aws_vpc.vpc.id
-
-  ingress {
-    protocol  = -1
-    self      = true
-    from_port = 0
-    to_port   = 0
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-    # cidr_blocks = ["127.0.0.1/32"]
   }
 }
 
