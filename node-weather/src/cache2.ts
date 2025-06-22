@@ -5,7 +5,7 @@ const CACHE_HOST = process.env.cache_host;
 const CACHE_PORT = process.env.cache_port;
 
 // Create and configure Redis client
-const cacheHost: string = `redis://${CACHE_HOST}:${CACHE_PORT}`;
+const cacheHost: string = `https://${CACHE_HOST}:${CACHE_PORT}`;
 const redisClient = createClient({
   url: cacheHost,
 });
