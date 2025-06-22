@@ -1,11 +1,13 @@
 # https://www.maxivanov.io/deploy-aws-lambda-to-vpc-with-terraform/
 resource "aws_vpc" "vpc" {
-  cidr_block = "10.0.0.0/16"
+  # cidr_block = "10.0.0.0/16"
+  cidr_block = "0.0.0.0/0"
 }
 
 resource "aws_subnet" "subnet_public" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = "10.0.0.0/21"
+  # cidr_block              = "10.0.0.0/21"
+  cidr_block = "0.0.0.0/0"
   map_public_ip_on_launch = true
 }
 
@@ -39,7 +41,8 @@ resource "aws_nat_gateway" "nat_gateway" {
 }
 resource "aws_subnet" "subnet_private" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = "10.0.8.0/21"
+  # cidr_block              = "10.0.8.0/21"
+  cidr_block = "0.0.0.0/0"
   map_public_ip_on_launch = false
 }
 
