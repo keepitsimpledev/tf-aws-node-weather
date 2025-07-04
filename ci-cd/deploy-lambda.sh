@@ -12,5 +12,8 @@ echo "BEGIN: terraform deploy"
 pushd tf-lambda/
 terraform init
 terraform apply --auto-approve
+pushd ../tf-lambda-example/
+terraform init
+terraform apply --auto-approve
 popd
 echo "END: terraform deploy"
