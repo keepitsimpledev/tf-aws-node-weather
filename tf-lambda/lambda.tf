@@ -35,7 +35,10 @@ resource "aws_lambda_function" "weather_lambda" {
 
   vpc_config {
     subnet_ids         = [aws_subnet.subnet_private.id]
-    security_group_ids = [aws_security_group.cache_sg.id]
+    security_group_ids = [
+      aws_security_group.cache_sg.id,
+      aws_default_security_group.default_security_group.id
+    ]
   }
 
   environment {
