@@ -3,6 +3,7 @@ import { createClient } from "redis";
 
 const CACHE_HOST = process.env.cache_host;
 const CACHE_PORT = process.env.cache_port;
+const CACHE_EXPIRATION_IN_SECONDS = 60 * 20;
 
 // Create and configure Redis client
 const cacheHost: string = `redis://${CACHE_HOST}:${CACHE_PORT}`;
@@ -13,7 +14,7 @@ redisClient.on("error", (err) => console.log("Redis Client Error", err));
 
 // Function to set a key-value pair in Redis
 export const setValue = async (key: string, value: string): Promise<void> => {
-  await redisClient.set(key, value, { EX: 60 });
+  await redisClient.set(key, value, { EX: CACHE_EXPIRATION_IN_SECONDS });
 };
 
 // Function to retrieve a value by key from Redis
