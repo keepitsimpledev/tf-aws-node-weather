@@ -28,7 +28,9 @@ export async function doCache(): Promise<string> {
 
   // Connect to Redis
   console.log(`connecting to redis client`);
-  await redisClient.connect();
+  if (!redisClient.isOpen) {
+    await redisClient.connect();
+  }
 
   console.log(`getKenny: ${await getValue("kennay")}`);
   await setValue("kennay", "Cat");
