@@ -14,7 +14,7 @@ const REDIS_AUTH_TOKEN = process.env.REDIS_AUTH_TOKEN || "";
 const KEY_CACHED_WEATHER = "WEATHER_CACHE"; // TODO: move weather-related behavior out of this class
 
 const redisClient: RedisClientType = createClient({
-  url: REDIS_URL //,
+  url: REDIS_URL, //,
   // password: REDIS_AUTH_TOKEN,
   // username: REDIS_USERNAME,
 });
@@ -34,7 +34,7 @@ export const getValue = async (key: string): Promise<string | null> => {
 export async function getPayload(): Promise<string> {
   // export async function getPayload(cacheKey: string): Promise<string> { // TODO: return this signature
   const cacheKey = KEY_CACHED_WEATHER;
-  
+
   console.log(`connecting to redis client`);
   if (!redisClient.isOpen) {
     await redisClient.connect();
