@@ -1,3 +1,5 @@
+// TODO: delete? or simplify
+
 // inspired by https://github.com/luafanti/elasticache-redis-and-lambda/blob/main/src/adapters/redis.ts
 // import {Logger} from '@aws-lambda-powertools/logger'
 import { RedisClientType } from "redis";

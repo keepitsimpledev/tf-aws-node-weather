@@ -3,32 +3,49 @@ import { createClient, RedisClientType } from "redis";
 import { createRedisAdapter } from "./redis-adapter";
 import { fetchWeather } from "./meteo";
 
+const CACHE_HOST = process.env.cache_host;
+const CACHE_PORT = process.env.cache_port;
+const REDIS_URL: string = `redis://${CACHE_HOST}:${CACHE_PORT}`;
+const CACHE_EXPIRATION_IN_SECONDS = 60 * 20;
+
 // TODO: configure these:
-const REDIS_URL = process.env.REDIS_URL || ""; // use tf variables.cache_host
 const REDIS_USERNAME = process.env.REDIS_USERNAME || "";
 const REDIS_AUTH_TOKEN = process.env.REDIS_AUTH_TOKEN || "";
 const KEY_CACHED_WEATHER = "WEATHER_CACHE"; // TODO: move weather-related behavior out of this class
 
 const redisClient: RedisClientType = createClient({
-  url: REDIS_URL,
-  password: REDIS_AUTH_TOKEN,
-  username: REDIS_USERNAME,
+  url: REDIS_URL //,
+  // password: REDIS_AUTH_TOKEN,
+  // username: REDIS_USERNAME,
 });
+redisClient.on("error", (err) => console.log("Redis Client Error", err));
+
+// Function to set a key-value pair in Redis
+export const setValue = async (key: string, value: string): Promise<void> => {
+  await redisClient.set(key, value, { EX: CACHE_EXPIRATION_IN_SECONDS });
+};
+
+// Function to retrieve a value by key from Redis
+export const getValue = async (key: string): Promise<string | null> => {
+  return redisClient.get(key);
+};
 
 // TODO: pass generic function as param, rather than explicitly calling weather function
 export async function getPayload(): Promise<string> {
   // export async function getPayload(cacheKey: string): Promise<string> { // TODO: return this signature
   const cacheKey = KEY_CACHED_WEATHER;
-  const redisAdapter = createRedisAdapter({ client: redisClient });
-  await redisClient.connect();
+  
+  console.log(`connecting to redis client`);
+  if (!redisClient.isOpen) {
+    await redisClient.connect();
+  }
 
-  let response: string;
-  if (await redisAdapter.existsInCache(cacheKey)) {
-    response = (await redisAdapter.getFromCache(cacheKey)) || "";
-  } else {
-    const weatherData = fetchWeather();
+  let response: string | null = await getValue(cacheKey);
+
+  if (null === response) {
+    const weatherData = await fetchWeather();
     response = JSON.stringify(weatherData);
-    redisAdapter.saveInCache(cacheKey, response);
+    await setValue(cacheKey, response);
   }
   return response;
 }
