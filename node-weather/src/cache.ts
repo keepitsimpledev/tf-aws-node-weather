@@ -1,6 +1,6 @@
 import { createClient, RedisClientType } from "redis";
 // import {Logger} from "@aws-lambda-powertools/logger"; // TODO: consider using this library
-import { createRedisAdapter } from "./redis-adapter";
+// import { createRedisAdapter } from "./redis-adapter";
 import { fetchWeather } from "./meteo";
 
 const CACHE_HOST = process.env.cache_host;
@@ -9,8 +9,8 @@ const REDIS_URL: string = `redis://${CACHE_HOST}:${CACHE_PORT}`;
 const CACHE_EXPIRATION_IN_SECONDS = 60 * 20;
 
 // TODO: configure these:
-const REDIS_USERNAME = process.env.REDIS_USERNAME || "";
-const REDIS_AUTH_TOKEN = process.env.REDIS_AUTH_TOKEN || "";
+// const REDIS_USERNAME = process.env.REDIS_USERNAME || "";
+// const REDIS_AUTH_TOKEN = process.env.REDIS_AUTH_TOKEN || "";
 const KEY_CACHED_WEATHER = "WEATHER_CACHE"; // TODO: move weather-related behavior out of this class
 
 const redisClient: RedisClientType = createClient({
