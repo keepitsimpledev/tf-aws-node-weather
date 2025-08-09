@@ -43,12 +43,12 @@ export async function getPayload(): Promise<string> {
   let response: string | null = await getValue(cacheKey);
 
   if (null === response) {
-    console.log('fetching meteo data');
+    console.log("fetching meteo data");
     const weatherData = await fetchWeather();
     response = JSON.stringify(weatherData);
     await setValue(cacheKey, response);
   } else {
-    console.log('using cached data');
+    console.log("using cached data");
   }
 
   return response;
