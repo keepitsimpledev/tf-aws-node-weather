@@ -6,14 +6,8 @@ const CACHE_PORT = process.env.cache_port;
 const REDIS_URL: string = `redis://${CACHE_HOST}:${CACHE_PORT}`;
 const CACHE_EXPIRATION_IN_SECONDS = 60 * 20;
 
-// TODO: configure these:
-// const REDIS_USERNAME = process.env.REDIS_USERNAME || "";
-// const REDIS_AUTH_TOKEN = process.env.REDIS_AUTH_TOKEN || "";
-
 const redisClient: RedisClientType = createClient({
-  url: REDIS_URL, //,
-  // password: REDIS_AUTH_TOKEN,
-  // username: REDIS_USERNAME,
+  url: REDIS_URL,
 });
 redisClient.on("error", (err) => console.log("Redis Client Error", err));
 

@@ -27,7 +27,7 @@ resource "aws_lambda_function" "weather_lambda" {
   function_name = "fetch_weather"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "index.lambdaHandler"
-  timeout       = 10 # TODO: reconsider value
+  timeout       = 30
 
   source_code_hash = data.archive_file.lambda.output_base64sha256
 
@@ -45,9 +45,6 @@ resource "aws_lambda_function" "weather_lambda" {
     variables = {
       cache_host = aws_elasticache_cluster.project_cache.cache_nodes[0].address
       cache_port = aws_elasticache_cluster.project_cache.port
-      # TODO: implement
-      cache_username = ""
-      cache_auth_token = ""
     }
   }
 }
