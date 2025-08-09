@@ -1,6 +1,8 @@
 import { APIGatewayProxyResult } from "aws-lambda";
 import { getPayload } from "./cache";
+import { fetchWeather } from "./meteo";
 
+const KEY_CACHED_WEATHER = "WEATHER_CACHE";
 let response: APIGatewayProxyResult;
 
 /**
@@ -22,7 +24,7 @@ exports.lambdaHandler = async () => {
     response = {
       statusCode: 200,
       body: JSON.stringify({
-        message: await getPayload(),
+        message: await getPayload(fetchWeather, KEY_CACHED_WEATHER),
       }),
     };
   } catch (err) {

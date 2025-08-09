@@ -1,7 +1,6 @@
 import { createClient, RedisClientType } from "redis";
 // import {Logger} from "@aws-lambda-powertools/logger"; // TODO: consider using this library
 // import { createRedisAdapter } from "./redis-adapter";
-import { fetchWeather } from "./meteo";
 
 const CACHE_HOST = process.env.cache_host;
 const CACHE_PORT = process.env.cache_port;
@@ -11,7 +10,6 @@ const CACHE_EXPIRATION_IN_SECONDS = 60 * 20;
 // TODO: configure these:
 // const REDIS_USERNAME = process.env.REDIS_USERNAME || "";
 // const REDIS_AUTH_TOKEN = process.env.REDIS_AUTH_TOKEN || "";
-const KEY_CACHED_WEATHER = "WEATHER_CACHE"; // TODO: move weather-related behavior out of this class
 
 const redisClient: RedisClientType = createClient({
   url: REDIS_URL, //,
@@ -31,10 +29,10 @@ export const getValue = async (key: string): Promise<string | null> => {
 };
 
 // TODO: pass generic function as param, rather than explicitly calling weather function
-export async function getPayload(): Promise<string> {
-  // export async function getPayload(cacheKey: string): Promise<string> { // TODO: return this signature
-  const cacheKey = KEY_CACHED_WEATHER;
-
+export async function getPayload(
+  fn: () => Promise<unknown>,
+  cacheKey: string,
+): Promise<string> {
   console.log(`connecting to redis client`);
   if (!redisClient.isOpen) {
     await redisClient.connect();
@@ -44,8 +42,8 @@ export async function getPayload(): Promise<string> {
 
   if (null === response) {
     console.log("fetching meteo data");
-    const weatherData = await fetchWeather();
-    response = JSON.stringify(weatherData);
+    const fetchedData = await fn();
+    response = JSON.stringify(fetchedData);
     await setValue(cacheKey, response);
   } else {
     console.log("using cached data");
