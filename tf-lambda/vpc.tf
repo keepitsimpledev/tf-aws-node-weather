@@ -96,8 +96,3 @@ resource "aws_default_security_group" "default_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
-# resource "aws_iam_role_policy_attachment" "iam_role_policy_attachment_lambda_vpc_access_execution" {
-#   role       = aws_iam_role.iam_for_lambda.name
-#   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-# }
