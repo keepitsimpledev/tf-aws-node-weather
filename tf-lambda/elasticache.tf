@@ -47,6 +47,7 @@ resource "aws_cloudwatch_log_group" "cache_logs" {
   name              = "cache-logs"
   retention_in_days = 14
 
+  # TODO: make these vars:
   tags = {
     Environment = "dev"
     Application = "node-weather"

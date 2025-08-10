@@ -41,10 +41,30 @@ resource "aws_lambda_function" "weather_lambda" {
     ]
   }
 
+  logging_config {
+    log_format            = "JSON"
+    application_log_level = "INFO"
+    system_log_level      = "WARN"
+  }
+
+  # Ensure log group exists before function
+  depends_on = [aws_cloudwatch_log_group.lambda_logs]
+
   environment {
     variables = {
       cache_host = aws_elasticache_cluster.project_cache.cache_nodes[0].address
       cache_port = aws_elasticache_cluster.project_cache.port
     }
+  }
+}
+
+resource "aws_cloudwatch_log_group" "lambda_logs" {
+  name              = "/aws/lambda/node_weather"
+  retention_in_days = 14
+
+  # TODO: make these vars:
+  tags = {
+    Environment = "dev"
+    Application = "node-weather"
   }
 }
