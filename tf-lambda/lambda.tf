@@ -42,6 +42,7 @@ resource "aws_lambda_function" "weather_lambda" {
   }
 
   logging_config {
+    log_group             = aws_cloudwatch_log_group.lambda_logs
     log_format            = "JSON"
     application_log_level = "INFO"
     system_log_level      = "WARN"
