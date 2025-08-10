@@ -1,3 +1,4 @@
+# ~20m to destroy
 resource "aws_security_group" "cache_sg" {
   name        = "cache-security-group"
   description = "Security group for Redis cluster"
@@ -43,7 +44,8 @@ resource "aws_elasticache_cluster" "project_cache" {
 }
 
 resource "aws_cloudwatch_log_group" "cache_logs" {
-  name = "cache-logs"
+  name              = "cache-logs"
+  retention_in_days = 14
 
   tags = {
     Environment = "dev"
