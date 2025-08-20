@@ -5,7 +5,7 @@ name: node-weather-destroy.yml
 on: workflow_dispatch
 
 jobs:
-  test:
+  destroy-resources:
     environment: dev # this and other github environments are configured in Settings > Environments
     runs-on: ubuntu-22.04
 
