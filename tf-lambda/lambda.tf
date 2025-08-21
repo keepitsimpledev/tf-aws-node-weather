@@ -27,8 +27,39 @@ resource "aws_lambda_function" "weather_lambda" {
   function_name = "fetch_weather"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "index.lambdaHandler"
+  timeout       = 30
 
   source_code_hash = data.archive_file.lambda.output_base64sha256
 
   runtime = "nodejs22.x"
+
+  vpc_config {
+    subnet_ids         = [aws_subnet.subnet_private.id]
+    security_group_ids = [
+      aws_security_group.cache_sg.id,
+      aws_default_security_group.default_security_group.id
+    ]
+  }
+
+  logging_config {
+    log_group             = aws_cloudwatch_log_group.lambda_logs.name
+    log_format            = "JSON"
+    application_log_level = "INFO"
+    system_log_level      = "WARN"
+  }
+
+  # Ensure log group exists before function
+  depends_on = [aws_cloudwatch_log_group.lambda_logs]
+
+  environment {
+    variables = {
+      cache_host = aws_elasticache_cluster.project_cache.cache_nodes[0].address
+      cache_port = aws_elasticache_cluster.project_cache.port
+    }
+  }
+}
+
+resource "aws_cloudwatch_log_group" "lambda_logs" {
+  name              = "/aws/lambda/node_weather"
+  retention_in_days = 14
 }

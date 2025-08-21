@@ -19,3 +19,5 @@ $ terraform destroy
 
 can also consider trying
 https://docs.aws.amazon.com/lambda/latest/dg/typescript-package.html
+
+used as guide: https://www.maxivanov.io/deploy-aws-lambda-to-vpc-with-terraform/

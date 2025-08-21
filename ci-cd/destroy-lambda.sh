@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e # https://linuxconfig.org/bash-script-error-handling-try-catch-in-bash
 
 echo "BEGIN: terraform destory"
 mkdir -p node-weather/dist/src/ # dummy directory to appease terraform
