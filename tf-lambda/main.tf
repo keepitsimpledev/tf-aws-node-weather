@@ -10,7 +10,7 @@ terraform {
   backend "s3" {
     bucket = "kis-node-weather"
     key    = "terraform/state"
-    region = var.aws_region
+    region = "eu-north-1" # ensure this is matches var.aws_region
   }
 
   required_version = ">= 1.2.0"
