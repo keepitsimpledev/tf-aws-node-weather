@@ -62,10 +62,4 @@ resource "aws_lambda_function" "weather_lambda" {
 resource "aws_cloudwatch_log_group" "lambda_logs" {
   name              = "/aws/lambda/node_weather"
   retention_in_days = 14
-
-  # TODO: make these vars:
-  tags = {
-    Environment = "dev"
-    Application = "node-weather"
-  }
 }

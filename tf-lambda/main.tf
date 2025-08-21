@@ -27,5 +27,3 @@ provider "aws" {
   }
 
 }
-
-// TODO: consider modules?
