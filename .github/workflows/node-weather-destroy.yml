@@ -17,3 +17,5 @@ jobs:
         export AWS_ACCESS_KEY_ID=${{ secrets.AKI }} # TODO: evaluate security of this pattern
         export AWS_SECRET_ACCESS_KEY=${{ secrets.SAK }}
         bash ci-cd/destroy-lambda.sh
+      env:
+        TF_VAR_env: ${{ vars.ENV }}"

@@ -18,6 +18,14 @@ terraform {
 
 provider "aws" {
   region = local.region
+
+  default_tags {
+    tags = {
+      Environment = var.env
+      Application = "node-weather"
+    }
+  }
+
 }
 
 // TODO: consider modules?
