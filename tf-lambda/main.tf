@@ -10,19 +10,19 @@ terraform {
   backend "s3" {
     bucket = "kis-node-weather"
     key    = "terraform/state"
-    region = "eu-north-1"
+    region = var.aws_region
   }
 
   required_version = ">= 1.2.0"
 }
 
 provider "aws" {
-  region = local.region
+  region = var.aws_region
 
   default_tags {
     tags = {
       Environment = var.env
-      Application = "node-weather"
+      Application = local.application
     }
   }
 

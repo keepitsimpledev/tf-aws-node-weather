@@ -34,3 +34,4 @@ jobs:
         bash ci-cd/deploy-lambda.sh
       env:
         TF_VAR_env: ${{ vars.ENV }}
+        TF_VAR_aws_region: ${{ vars.AWS_REGION }}
