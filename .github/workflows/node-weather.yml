@@ -33,4 +33,4 @@ jobs:
         export AWS_SECRET_ACCESS_KEY=${{ secrets.SAK }}
         bash ci-cd/deploy-lambda.sh
       env:
-        TF_VAR_env: ${{ vars.ENV }}"
+        TF_VAR_env: ${{ vars.ENV }}
